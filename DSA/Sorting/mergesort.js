@@ -1,4 +1,4 @@
-const arr = [43, 12, 29, 20];
+const arr = [43, 12, 29, 20, -2, 0, 21];
 
 function mergeSort(arr) {
 
@@ -13,7 +13,6 @@ function mergeSort(arr) {
 
   const sortedLeftHalf = mergeSort(leftHalf);
   const sortedRightHalf = mergeSort(rightHalf);
-
   return merge(sortedLeftHalf, sortedRightHalf);
 }
 
@@ -22,9 +21,19 @@ function merge(left, right) {
   let leftIndex = 0;
   let rightIndex = 0;
 
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex])
+      leftIndex++;
+    } else {
+      result.push(right[rightIndex])
+      rightIndex++;
+    }
+  }
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex))
 }
 
-const b = mergeSort(arr, 0, arr.length - 1);
+const b = mergeSort(arr);
 
 console.log('sorted arr: ', b)
 
