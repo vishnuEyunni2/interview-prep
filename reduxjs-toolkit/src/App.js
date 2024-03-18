@@ -3,30 +3,35 @@ import './App.css';
 import { useSelector } from 'react-redux';
 
 function App() {
+  const todos = useSelector((state) => state?.todos)
 
-  const todos = useSelector({
-    name: 'todos'
-  })
+  function addTodo(e) {
+    e.preventDefault()
+    console.log(e);
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
       <main>
-        <h3>{todos.length}</h3>
+        <h3>Todo Count: {todos?.length}</h3>
       </main>
+      <section>
+        <form id='form'>
+          <input type="text" />
+          <button onClick={addTodo}>Add todo item</button>
+        </form>
+      </section>
+      <section className='todo-list'>
+        <ul>
+          {todos.length > 0 && todos.forEach((item, x) => {
+            return (
+              <>
+                <li key={item.id}>{item.text}</li>
+              </>
+            )
+          })}
+        </ul>
+      </section>
     </div>
   );
 }
