@@ -1,13 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+import { todoAdded } from './features/todos/todoSlice';
 
 function App() {
   const todos = useSelector((state) => state?.todos)
+  const [title, setTitle] = useState('');
+  const dispatch = useDispatch();
 
   function addTodo(e) {
-    e.preventDefault()
-    console.log(e);
+    e.preventDefault();
+    if (title) {
+      dispatch(
+        todoAdded({
+          id: nanoid(16),
+          text: title
+        })
+      );
+    }
+    setTitle('')
   }
 
   return (
@@ -17,20 +30,24 @@ function App() {
       </main>
       <section>
         <form id='form'>
-          <input type="text" />
-          <button onClick={addTodo}>Add todo item</button>
+          <div>
+            <label htmlFor="title">Title: </label>
+            <input id='title' onChange={(e) => {
+              setTitle(e.target.value)
+            }} type="text" value={title} />
+          </div>
+          <button onClick={(e) => addTodo(e)}>Add todo item</button>
         </form>
       </section>
       <section className='todo-list'>
-        <ul>
-          {todos.length > 0 && todos.forEach((item, x) => {
-            return (
-              <>
-                <li key={item.id}>{item.text}</li>
-              </>
-            )
-          })}
-        </ul>
+        <>
+          {todos.map((item, x) => (
+            <div key={item.id}>
+              <p key={item.id}>{item.text}</p>
+            </div>
+          )
+          )}
+        </>
       </section>
     </div>
   );

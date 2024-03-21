@@ -5,12 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import Posts from './features/posts/postsList'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <div className='base'>
+        <App />
+        <Posts />
+      </div>
     </Provider>
   </React.StrictMode>
 );

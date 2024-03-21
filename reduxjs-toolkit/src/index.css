@@ -20,3 +20,17 @@ code {
   align-items: start;
   flex-direction: column;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid yellow;
+  overflow: hidden;
+}
+
+.base {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
