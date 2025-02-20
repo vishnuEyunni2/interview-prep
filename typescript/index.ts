@@ -6,3 +6,4 @@ type B = {
 export type A = B & {
   a: string;
 };
+
